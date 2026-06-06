@@ -1,0 +1,23 @@
+{%- comment -%}
+  NOIR Divider — Visual break between sections
+{%- endcomment -%}
+
+<div class="noir-divider" {{ section.shopify_attributes }}>
+  <span class="noir-divider__line"></span>
+  <span class="noir-divider__icon" aria-hidden="true">✦</span>
+  <span class="noir-divider__line"></span>
+</div>
+
+{% schema %}
+{
+  "name": "NOIR Divider",
+  "tag": "section",
+  "class": "noir-divider-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "NOIR Divider"
+    }
+  ]
+}
+{% endschema %}

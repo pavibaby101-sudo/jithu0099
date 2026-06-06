@@ -1,0 +1,105 @@
+{%- comment -%}
+  NOIR Editorial Collection Grid — Asymmetric (2/1 + 1/1 + 1/1)
+  Up to 3 blocks: first is large (spans 2 rows), other 2 are smaller.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-editorial" {{ section.shopify_attributes }}>
+    {%- if section.settings.title != blank -%}
+      <h2
+        class="noir-collection__title"
+        style="text-align: center; margin-bottom: 3rem;"
+      >{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    <div class="noir-editorial__grid">
+      {%- for block in section.blocks -%}
+        <a
+          href="{{ block.settings.link | default: '#' }}"
+          class="noir-editorial__item"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 1200 }}"
+              alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+              loading="lazy"
+            >
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+          <div class="noir-editorial__overlay">
+            <h3 class="noir-editorial__title">{{ block.settings.title }}</h3>
+            <span class="noir-editorial__cta">{{ block.settings.cta | default: 'Shop Now' }}</span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Editorial Grid",
+  "tag": "section",
+  "class": "noir-editorial-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Shop by Edit"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Outerwear"
+        },
+        {
+          "type": "text",
+          "id": "cta",
+          "label": "CTA text",
+          "default": "Shop Now"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "NOIR Editorial Grid",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": { "title": "Outerwear", "cta": "Shop Now" }
+        },
+        {
+          "type": "item",
+          "settings": { "title": "Knitwear", "cta": "Shop Now" }
+        },
+        {
+          "type": "item",
+          "settings": { "title": "Footwear", "cta": "Shop Now" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,109 @@
+{%- comment -%}
+  NOIR Product List — Text rows that expand on hover
+  Use a collection. Each product becomes a row.
+{%- endcomment -%}
+
+{%- liquid
+  assign collection_handle = section.settings.collection
+  assign collection = nil
+  if collection_handle != blank and collections[collection_handle] != blank
+    assign collection = collections[collection_handle]
+  endif
+  assign limit = section.settings.products_to_show | default: 6
+-%}
+
+<section class="noir-product-list noir-reveal" {{ section.shopify_attributes }}>
+  <div class="noir-product-list__inner">
+    <div class="noir-product-list__header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="noir-product-list__subtitle">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="noir-product-list__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- if collection and collection.products.size > 0 -%}
+      {%- for product in collection.products limit: limit -%}
+        <a href="{{ product.url }}" class="noir-product-list__row">
+          <span class="noir-product-list__num">{{ forloop.index | prepend: '00' | slice: -2, 2 }}</span>
+          <h3 class="noir-product-list__name">{{ product.title }}</h3>
+          <span class="noir-product-list__category">
+            {%- if product.type != blank -%}{{ product.type }}{%- else -%}Apparel{%- endif -%}
+          </span>
+          <span class="noir-product-list__price">
+            {%- if product.compare_at_price > product.price -%}
+              <s style="opacity:0.4; margin-right:0.5rem;">{{ product.compare_at_price | money }}</s>
+              <span style="color: #d4af37;">{{ product.price | money }}</span>
+            {%- else -%}
+              {{ product.price | money }}
+            {%- endif -%}
+          </span>
+          <span class="noir-product-list__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- comment -%} Placeholder rows when no collection selected {%- endcomment -%}
+      {%- for i in (1..limit) -%}
+        <div class="noir-product-list__row">
+          <span class="noir-product-list__num">0{{ i }}</span>
+          <h3 class="noir-product-list__name">Sample Product {{ i }}</h3>
+          <span class="noir-product-list__category">Apparel</span>
+          <span class="noir-product-list__price">$0.00</span>
+          <span class="noir-product-list__arrow" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </span>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIR Product List",
+  "tag": "section",
+  "class": "noir-product-list-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Curated for you"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Essentials"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Product List"
+    }
+  ]
+}
+{% endschema %}

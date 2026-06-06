@@ -1,0 +1,103 @@
+{%- comment -%}
+  NOIR USP Icons Row — Free shipping, returns, etc.
+  Up to 4 blocks. Each has a built-in SVG icon picker.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-usp noir-stagger" {{ section.shopify_attributes }}>
+    {%- for block in section.blocks -%}
+      <div class="noir-usp__item" {{ block.shopify_attributes }}>
+        <div class="noir-usp__icon">
+          {%- case block.settings.icon -%}
+            {%- when 'truck' -%}
+              <svg viewBox="0 0 24 24"><path d="M1 3h15v13H1z"></path><path d="M16 8h4l3 3v5h-7z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+            {%- when 'return' -%}
+              <svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+            {%- when 'shield' -%}
+              <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            {%- when 'star' -%}
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            {%- when 'globe' -%}
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            {%- when 'lock' -%}
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            {%- else -%}
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          {%- endcase -%}
+        </div>
+        <div class="noir-usp__content">
+          <h4>{{ block.settings.title }}</h4>
+          <p>{{ block.settings.text }}</p>
+        </div>
+      </div>
+    {%- endfor -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR USP Icons Row",
+  "tag": "section",
+  "class": "noir-usp-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "USP",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "truck", "label": "Shipping (truck)" },
+            { "value": "return", "label": "Returns" },
+            { "value": "shield", "label": "Security / guarantee" },
+            { "value": "star", "label": "Quality / rating" },
+            { "value": "globe", "label": "Worldwide" },
+            { "value": "lock", "label": "Secure payment" },
+            { "value": "clock", "label": "24/7 support" }
+          ],
+          "default": "truck"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Free Shipping"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "On all orders over $200"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "NOIR USP Icons Row",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": { "icon": "truck", "title": "Free Shipping", "text": "On orders over $200" }
+        },
+        {
+          "type": "item",
+          "settings": { "icon": "return", "title": "30-Day Returns", "text": "No questions asked" }
+        },
+        {
+          "type": "item",
+          "settings": { "icon": "shield", "title": "Secure Payment", "text": "256-bit SSL encryption" }
+        },
+        {
+          "type": "item",
+          "settings": { "icon": "clock", "title": "24/7 Support", "text": "Always here for you" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

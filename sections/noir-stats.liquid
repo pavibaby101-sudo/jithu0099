@@ -1,0 +1,91 @@
+{%- comment -%}
+  NOIR Brand Stats — Animated counters
+  Up to 4 blocks per section.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section
+    class="noir-stats noir-stagger"
+    {{ section.shopify_attributes }}
+  >
+    {%- for block in section.blocks -%}
+      <div class="noir-stat" {{ block.shopify_attributes }}>
+        {%- if block.settings.prefix != blank -%}<span class="noir-stat__number">{{ block.settings.prefix }}</span>{%- endif -%}
+        <span
+          class="noir-stat__number noir-stat__counter"
+          data-target="{{ block.settings.number }}"
+          data-suffix="{{ block.settings.suffix }}"
+        >0</span>
+        <p class="noir-stat__label">{{ block.settings.label }}</p>
+      </div>
+    {%- endfor -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Brand Stats",
+  "tag": "section",
+  "class": "noir-stats-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "info": "The target value to count up to (e.g. 100, 50, 2.5)",
+          "default": "100"
+        },
+        {
+          "type": "text",
+          "id": "prefix",
+          "label": "Prefix",
+          "info": "Optional. e.g. '$' or '<'",
+          "default": ""
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix",
+          "info": "Optional. e.g. 'K', '+', '%'",
+          "default": "K"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Happy customers"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "NOIR Brand Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": { "number": "100", "suffix": "K+", "label": "Happy Customers" }
+        },
+        {
+          "type": "stat",
+          "settings": { "number": "50", "suffix": "+", "label": "Countries Shipped" }
+        },
+        {
+          "type": "stat",
+          "settings": { "number": "5", "suffix": "★", "label": "Average Rating" }
+        },
+        {
+          "type": "stat",
+          "settings": { "number": "365", "suffix": "", "label": "Day Returns" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

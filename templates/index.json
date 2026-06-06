@@ -1,17 +1,11 @@
 /*
  * NOIR — Home page template
- * Order: Marquee -> Hero -> Intro -> Featured Collection -> Mission/Vision -> Lookbook -> Newsletter
+ * Order: Hero -> Marquee text -> USP -> Intro -> Featured Collection -> Divider
+ *        -> Mission/Vision -> Stats -> Media with Content -> Editorial Grid
+ *        -> Lookbook -> Product List -> Dual Marquee -> Newsletter
  */
 {
   "sections": {
-    "intro": {
-      "type": "noir-intro",
-      "name": "NOIR Intro",
-      "settings": {
-        "title": "Designed to Disrupt",
-        "text": "Luxury staples for the modern disruptor. Precision-tailored pieces that break convention and redefine presence. This isn't just fashion — it's a statement."
-      }
-    },
     "hero": {
       "type": "noir-hero",
       "name": "NOIR Hero",
@@ -27,6 +21,37 @@
         "show_scroll_indicator": true
       }
     },
+    "usp": {
+      "type": "noir-usp",
+      "name": "NOIR USP Icons Row",
+      "blocks": {
+        "shipping": {
+          "type": "item",
+          "settings": { "icon": "truck", "title": "Free Shipping", "text": "On orders over $200" }
+        },
+        "returns": {
+          "type": "item",
+          "settings": { "icon": "return", "title": "30-Day Returns", "text": "No questions asked" }
+        },
+        "secure": {
+          "type": "item",
+          "settings": { "icon": "shield", "title": "Secure Payment", "text": "256-bit SSL encryption" }
+        },
+        "support": {
+          "type": "item",
+          "settings": { "icon": "clock", "title": "24/7 Support", "text": "Always here for you" }
+        }
+      },
+      "block_order": ["shipping", "returns", "secure", "support"]
+    },
+    "intro": {
+      "type": "noir-intro",
+      "name": "NOIR Intro",
+      "settings": {
+        "title": "Designed to Disrupt",
+        "text": "Luxury staples for the modern disruptor. Precision-tailored pieces that break convention and redefine presence. This isn't just fashion — it's a statement."
+      }
+    },
     "featured_collection": {
       "type": "noir-featured-collection",
       "name": "NOIR Featured Collection",
@@ -36,6 +61,10 @@
         "products_to_show": 4,
         "columns_desktop": 4
       }
+    },
+    "divider_1": {
+      "type": "noir-divider",
+      "name": "NOIR Divider"
     },
     "mission_vision": {
       "type": "noir-mission-vision",
@@ -65,10 +94,64 @@
           }
         }
       },
-      "block_order": [
-        "mission",
-        "vision"
-      ]
+      "block_order": ["mission", "vision"]
+    },
+    "stats": {
+      "type": "noir-stats",
+      "name": "NOIR Brand Stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": { "number": "100", "suffix": "K+", "label": "Happy Customers" }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": { "number": "50", "suffix": "+", "label": "Countries Shipped" }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": { "number": "5", "suffix": "★", "label": "Average Rating" }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": { "number": "365", "suffix": "", "label": "Day Returns" }
+        }
+      },
+      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"]
+    },
+    "media_content": {
+      "type": "noir-media-content",
+      "name": "NOIR Media with Content",
+      "settings": {
+        "image": "",
+        "eyebrow": "Editorial",
+        "title": "Beyond the season",
+        "text": "An ongoing study in form, fabric, and intent. We don't follow the calendar.",
+        "button_label": "Discover",
+        "button_link": "shopify://pages/about"
+      }
+    },
+    "editorial_grid": {
+      "type": "noir-editorial-grid",
+      "name": "NOIR Editorial Grid",
+      "settings": {
+        "title": "Shop by Edit"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": { "title": "Outerwear", "cta": "Shop Now" }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": { "title": "Knitwear", "cta": "Shop Now" }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": { "title": "Footwear", "cta": "Shop Now" }
+        }
+      },
+      "block_order": ["item_1", "item_2", "item_3"]
     },
     "lookbook": {
       "type": "noir-lookbook",
@@ -81,6 +164,23 @@
         "text": "Step into the world we've built — a study in fabric, fit, and intent.",
         "cta_label": "Watch the film",
         "cta_link": "shopify://pages/about"
+      }
+    },
+    "product_list": {
+      "type": "noir-product-list",
+      "name": "NOIR Product List",
+      "settings": {
+        "eyebrow": "Curated for you",
+        "title": "The Essentials",
+        "collection": "all",
+        "products_to_show": 6
+      }
+    },
+    "dual_marquee": {
+      "type": "noir-dual-marquee",
+      "name": "NOIR Dual Marquee",
+      "settings": {
+        "text_items": "New Collection | Free Shipping | Limited Edition | Bold Vision"
       }
     },
     "newsletter": {
@@ -97,10 +197,17 @@
   },
   "order": [
     "hero",
+    "usp",
     "intro",
     "featured_collection",
+    "divider_1",
     "mission_vision",
+    "stats",
+    "media_content",
+    "editorial_grid",
     "lookbook",
+    "product_list",
+    "dual_marquee",
     "newsletter"
   ]
 }

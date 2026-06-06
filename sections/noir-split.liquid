@@ -1,0 +1,129 @@
+{%- comment -%}
+  NOIR Split — Half image, half text, fully premium
+  Add up to 4 rows per section.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="noir-split-wrapper" {{ section.shopify_attributes }}>
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign reverse = false
+        if block.settings.image_position == 'right'
+          assign reverse = true
+        endif
+      -%}
+      <section
+        class="noir-split{% if reverse %} noir-split--reverse{% endif %} noir-slide-up"
+        {{ block.shopify_attributes }}
+      >
+        <div class="noir-split__media">
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 1400 }}"
+              alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+              width="{{ block.settings.image.width }}"
+              height="{{ block.settings.image.height }}"
+              loading="lazy"
+            >
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+
+        <div class="noir-split__content">
+          {%- if block.settings.eyebrow != blank -%}
+            <p class="noir-split__eyebrow">{{ block.settings.eyebrow }}</p>
+          {%- endif -%}
+          {%- if block.settings.title != blank -%}
+            <h2 class="noir-split__title">{{ block.settings.title }}</h2>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="noir-split__text">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <a href="{{ block.settings.button_link | default: '#' }}" class="noir-split__cta">
+              {{ block.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      </section>
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Split Image + Text",
+  "tag": "section",
+  "class": "noir-split-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Eyebrow",
+          "default": "The Craft"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Made by hand"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Body",
+          "default": "<p>Every piece in our collection is constructed by hand in our atelier. No shortcuts. No compromises. Just fabric, intent, and time.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Read More"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "NOIR Split Image + Text",
+      "blocks": [
+        {
+          "type": "row",
+          "settings": {
+            "eyebrow": "The Craft",
+            "title": "Made by hand",
+            "image_position": "left"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
