@@ -1,9 +1,11 @@
 /*
- * ATTITUDE — Home page template
- * Premium order: Hero (fullscreen) -> USP -> Press -> Intro -> Featured Collection
- * -> Divider -> Mission/Vision -> Stats -> Features -> Media with Content
- * -> Editorial Grid -> Lookbook -> Product List -> Heritage Timeline
- * -> Divider -> Testimonials -> Dual Marquee -> FAQ -> Newsletter
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
  */
 {
   "sections": {
@@ -11,40 +13,14 @@
       "type": "noir-hero",
       "name": "NOIR Hero",
       "settings": {
-        "image": "",
-        "video": "",
-        "headline_1": "Style",
-        "headline_2": "Vibe",
-        "headline_3": "Reflect",
+        "headline_1": "wear",
+        "headline_2": "your",
+        "headline_3": "attitude",
         "subline": "Add a little bit of body text",
         "button_label": "Shop Now",
         "button_link": "shopify://collections/all",
         "show_scroll_indicator": true
       }
-    },
-    "usp": {
-      "type": "noir-usp",
-      "name": "NOIR USP Icons Row",
-      "blocks": {
-        "shipping": { "type": "item", "settings": { "icon": "truck", "title": "Free Shipping", "text": "On orders over $200" } },
-        "returns": { "type": "item", "settings": { "icon": "return", "title": "30-Day Returns", "text": "No questions asked" } },
-        "secure":  { "type": "item", "settings": { "icon": "shield", "title": "Secure Payment", "text": "256-bit SSL encryption" } },
-        "support": { "type": "item", "settings": { "icon": "clock", "title": "24/7 Support", "text": "Always here for you" } }
-      },
-      "block_order": ["shipping", "returns", "secure", "support"]
-    },
-    "press": {
-      "type": "noir-press",
-      "name": "NOIR Press",
-      "settings": { "eyebrow": "As featured in" },
-      "blocks": {
-        "l1": { "type": "logo", "settings": { "name": "VOGUE" } },
-        "l2": { "type": "logo", "settings": { "name": "HYPEBEAST" } },
-        "l3": { "type": "logo", "settings": { "name": "HIGH SNOBIETY" } },
-        "l4": { "type": "logo", "settings": { "name": "DAZED" } },
-        "l5": { "type": "logo", "settings": { "name": "i-D" } }
-      },
-      "block_order": ["l1", "l2", "l3", "l4", "l5"]
     },
     "intro": {
       "type": "noir-intro",
@@ -64,7 +40,6 @@
         "columns_desktop": 4
       }
     },
-    "divider_1": { "type": "noir-divider", "name": "NOIR Divider" },
     "mission_vision": {
       "type": "noir-mission-vision",
       "blocks": {
@@ -74,7 +49,6 @@
             "eyebrow": "Our Mission",
             "title": "Crafted to Outlast",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "image": "",
             "image_position": "left",
             "button_label": "Learn More",
             "button_link": "shopify://pages/about"
@@ -86,127 +60,28 @@
             "eyebrow": "Our Vision",
             "title": "Made for the Modern",
             "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "image": "",
             "image_position": "right",
             "button_label": "Learn More",
             "button_link": "shopify://pages/about"
           }
         }
       },
-      "block_order": ["mission", "vision"]
-    },
-    "stats": {
-      "type": "noir-stats",
-      "name": "NOIR Brand Stats",
-      "blocks": {
-        "stat_1": { "type": "stat", "settings": { "number": "100", "suffix": "K+", "label": "Happy Customers" } },
-        "stat_2": { "type": "stat", "settings": { "number": "50", "suffix": "+",  "label": "Countries Shipped" } },
-        "stat_3": { "type": "stat", "settings": { "number": "5",   "suffix": "★",  "label": "Average Rating" } },
-        "stat_4": { "type": "stat", "settings": { "number": "365", "suffix": "",   "label": "Day Returns" } }
-      },
-      "block_order": ["stat_1", "stat_2", "stat_3", "stat_4"]
-    },
-    "features": {
-      "type": "noir-features",
-      "name": "NOIR Features",
-      "settings": {
-        "eyebrow": "Why ATTITUDE",
-        "title": "Built different"
-      },
-      "blocks": {
-        "f1": { "type": "feature", "settings": { "icon": "scissors", "title": "Tailored by hand",   "text": "Every piece passes through 12 sets of hands." } },
-        "f2": { "type": "feature", "settings": { "icon": "leaf",     "title": "Ethically sourced",  "text": "100% organic cotton, recycled packaging." } },
-        "f3": { "type": "feature", "settings": { "icon": "award",    "title": "Award-winning",      "text": "Voted Best Streetwear 2025." } }
-      },
-      "block_order": ["f1", "f2", "f3"]
-    },
-    "media_content": {
-      "type": "noir-media-content",
-      "name": "NOIR Media with Content",
-      "settings": {
-        "image": "",
-        "eyebrow": "Editorial",
-        "title": "Beyond the season",
-        "text": "An ongoing study in form, fabric, and intent. We don't follow the calendar.",
-        "button_label": "Discover",
-        "button_link": "shopify://pages/about"
-      }
-    },
-    "editorial_grid": {
-      "type": "noir-editorial-grid",
-      "name": "NOIR Editorial Grid",
-      "settings": { "title": "Shop by Edit" },
-      "blocks": {
-        "item_1": { "type": "item", "settings": { "title": "Outerwear", "cta": "Shop Now" } },
-        "item_2": { "type": "item", "settings": { "title": "Knitwear",  "cta": "Shop Now" } },
-        "item_3": { "type": "item", "settings": { "title": "Footwear",  "cta": "Shop Now" } }
-      },
-      "block_order": ["item_1", "item_2", "item_3"]
+      "block_order": [
+        "mission",
+        "vision"
+      ],
+      "settings": {}
     },
     "lookbook": {
       "type": "noir-lookbook",
       "name": "NOIR Lookbook",
       "settings": {
-        "video": "",
-        "poster": "",
         "eyebrow": "Lookbook",
         "title": "The Movement",
         "text": "Step into the world we've built — a study in fabric, fit, and intent.",
         "cta_label": "Watch the film",
         "cta_link": "shopify://pages/about"
       }
-    },
-    "product_list": {
-      "type": "noir-product-list",
-      "name": "NOIR Product List",
-      "settings": {
-        "eyebrow": "Curated for you",
-        "title": "The Essentials",
-        "collection": "all",
-        "products_to_show": 6
-      }
-    },
-    "heritage": {
-      "type": "noir-heritage",
-      "name": "NOIR Heritage Timeline",
-      "settings": { "eyebrow": "The journey", "title": "Heritage" },
-      "blocks": {
-        "e1": { "type": "event", "settings": { "year": "2018", "title": "Founded",          "text": "A single seam in a small atelier." } },
-        "e2": { "type": "event", "settings": { "year": "2020", "title": "First drop",       "text": "Sold out in 48 hours." } },
-        "e3": { "type": "event", "settings": { "year": "2022", "title": "Worldwide shipping","text": "We started shipping to 50+ countries." } },
-        "e4": { "type": "event", "settings": { "year": "2024", "title": "100K customers",   "text": "A milestone we don't take lightly." } },
-        "e5": { "type": "event", "settings": { "year": "2026", "title": "Next chapter",     "text": "An ongoing study in form, fabric, and intent." } }
-      },
-      "block_order": ["e1", "e2", "e3", "e4", "e5"]
-    },
-    "divider_2": { "type": "noir-divider", "name": "NOIR Divider" },
-    "testimonials": {
-      "type": "noir-testimonials",
-      "name": "NOIR Testimonials",
-      "settings": { "eyebrow": "Voices", "title": "What they say" },
-      "blocks": {
-        "t1": { "type": "testimonial", "settings": { "quote": "The fit, the fabric, the way it makes me feel. ATTITUDE is the only label I reach for.", "author": "Aria Mendoza", "role": "Verified buyer — Los Angeles" } },
-        "t2": { "type": "testimonial", "settings": { "quote": "I've owned a lot of hoodies. None of them feel like this. None of them look like this either.", "author": "Theo K.", "role": "Verified buyer — Berlin" } },
-        "t3": { "type": "testimonial", "settings": { "quote": "Fast shipping, beautiful packaging, and the piece itself is a work of art. Worth every rupee.", "author": "Sana Iyer", "role": "Verified buyer — Mumbai" } }
-      },
-      "block_order": ["t1", "t2", "t3"]
-    },
-    "dual_marquee": {
-      "type": "noir-dual-marquee",
-      "name": "NOIR Dual Marquee",
-      "settings": { "text_items": "New Collection | Free Shipping | Limited Edition | Bold Vision" }
-    },
-    "faq": {
-      "type": "noir-faq",
-      "name": "NOIR FAQ",
-      "settings": { "eyebrow": "Got questions?", "title": "Frequently Asked", "text": "Everything you need to know before you order." },
-      "blocks": {
-        "q1": { "type": "item", "settings": { "question": "How long does shipping take?", "answer": "<p>Standard shipping takes 5–8 business days. Express is 2–3.</p>" } },
-        "q2": { "type": "item", "settings": { "question": "What is your return policy?",  "answer": "<p>30-day returns on all unworn items. We provide a prepaid return label.</p>" } },
-        "q3": { "type": "item", "settings": { "question": "Do you ship internationally?", "answer": "<p>Yes — we ship to 50+ countries. International orders over $200 ship free.</p>" } },
-        "q4": { "type": "item", "settings": { "question": "How do I care for my garment?", "answer": "<p>Cold wash, inside out, hang dry. Detailed care instructions come with every order.</p>" } }
-      },
-      "block_order": ["q1", "q2", "q3", "q4"]
     },
     "newsletter": {
       "type": "noir-newsletter",
@@ -222,23 +97,10 @@
   },
   "order": [
     "hero",
-    "usp",
-    "press",
     "intro",
     "featured_collection",
-    "divider_1",
     "mission_vision",
-    "stats",
-    "features",
-    "media_content",
-    "editorial_grid",
     "lookbook",
-    "product_list",
-    "heritage",
-    "divider_2",
-    "testimonials",
-    "dual_marquee",
-    "faq",
     "newsletter"
   ]
 }
