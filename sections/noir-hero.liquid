@@ -1,0 +1,156 @@
+{%- comment -%}
+  NOIR Hero — Fullscreen dark hero with overlapping bold headline
+{%- endcomment -%}
+
+<section
+  class="noir-hero"
+  data-noir-hero
+  {{ section.shopify_attributes }}
+>
+  {%- if section.settings.image != blank -%}
+    <div class="noir-hero__media">
+      <img
+        src="{{ section.settings.image | image_url: width: 2400 }}"
+        alt="{{ section.settings.image.alt | default: shop.name | escape }}"
+        width="{{ section.settings.image.width }}"
+        height="{{ section.settings.image.height }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    </div>
+  {%- elsif section.settings.video != blank -%}
+    <div class="noir-hero__media">
+      {{
+        section.settings.video
+        | video_tag:
+          image_size: '2400x',
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          controls: false
+      }}
+    </div>
+  {%- else -%}
+    <div class="noir-hero__media" style="background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);"></div>
+  {%- endif -%}
+
+  <div class="noir-hero__overlay"></div>
+
+  <div class="noir-hero__content">
+    {%- if section.settings.headline_1 != blank or section.settings.headline_2 != blank or section.settings.headline_3 != blank -%}
+      {%- liquid
+        assign hero_tag = 'h1'
+        if template.name != 'index'
+          assign hero_tag = 'h2'
+        endif
+      -%}
+      <{{ hero_tag }} class="noir-hero__headline">
+        {%- if section.settings.headline_1 != blank -%}<span>{{ section.settings.headline_1 }}</span>{%- endif -%}
+        {%- if section.settings.headline_2 != blank -%}<span>{{ section.settings.headline_2 }}</span>{%- endif -%}
+        {%- if section.settings.headline_3 != blank -%}<span>{{ section.settings.headline_3 }}</span>{%- endif -%}
+      </{{ hero_tag }}>
+    {%- endif -%}
+
+    {%- if section.settings.subline != blank -%}
+      <p class="noir-hero__subline">{{ section.settings.subline }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <a
+        href="{{ section.settings.button_link | default: '#' }}"
+        class="noir-hero__cta"
+      >
+        {{ section.settings.button_label }}
+      </a>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_scroll_indicator -%}
+    <div class="noir-hero__scroll">Scroll</div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "NOIR Hero",
+  "tag": "section",
+  "class": "noir-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "Recommended: dark editorial fashion imagery, 2400x1600 or larger."
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video (overrides image)",
+      "info": "Autoplays muted. Use short looping MP4."
+    },
+    {
+      "type": "header",
+      "content": "Headline"
+    },
+    {
+      "type": "text",
+      "id": "headline_1",
+      "label": "Headline line 1",
+      "default": "Style"
+    },
+    {
+      "type": "text",
+      "id": "headline_2",
+      "label": "Headline line 2",
+      "default": "Vibe"
+    },
+    {
+      "type": "text",
+      "id": "headline_3",
+      "label": "Headline line 3",
+      "default": "Reflect"
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Sub-line (italic)",
+      "default": "Add a little bit of body text"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Display"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_scroll_indicator",
+      "label": "Show scroll indicator",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Hero"
+    }
+  ]
+}
+{% endschema %}

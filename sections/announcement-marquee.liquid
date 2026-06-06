@@ -1,0 +1,57 @@
+{%- comment -%}
+  Announcement Marquee — NOIR
+  Scrolling text strip at the very top of the page.
+{%- endcomment -%}
+
+{%- liquid
+  assign items_raw = section.settings.items | default: 'Limited Releases | Exclusive Drops | Elegance is now live'
+  assign items_arr = items_raw | split: '|'
+-%}
+
+{%- if items_arr.size > 0 -%}
+  <div
+    class="noir-marquee"
+    role="region"
+    aria-label="{{ section.settings.aria_label | escape }}"
+    {{ section.shopify_attributes }}
+  >
+    <div class="noir-marquee__track">
+      {%- for i in (1..2) -%}
+        {%- for line in items_arr -%}
+          {%- assign trimmed = line | strip -%}
+          {%- if trimmed != blank -%}
+            <span class="noir-marquee__item">{{ trimmed }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Announcement Marquee",
+  "tag": "section",
+  "class": "noir-marquee-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "aria_label",
+      "label": "Accessibility label",
+      "default": "Announcements"
+    },
+    {
+      "type": "textarea",
+      "id": "items",
+      "label": "Marquee items",
+      "info": "Separate each item with a | (pipe) character. They scroll infinitely.",
+      "default": "Limited Releases | Exclusive Drops | Elegance is now live | Free shipping over $200"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Announcement Marquee"
+    }
+  ]
+}
+{% endschema %}

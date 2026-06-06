@@ -1,0 +1,122 @@
+{%- comment -%}
+  NOIR Lookbook — Fullscreen video / image with centered content + play button
+{%- endcomment -%}
+
+<section
+  class="noir-lookbook"
+  data-noir-lookbook
+  {{ section.shopify_attributes }}
+>
+  {%- if section.settings.video != blank -%}
+    {{
+      section.settings.video
+      | video_tag:
+        image_size: '2400x',
+        autoplay: true,
+        loop: true,
+        muted: true,
+        playsinline: true,
+        controls: false,
+        class: 'noir-lookbook__video'
+    }}
+  {%- elsif section.settings.poster != blank -%}
+    <div
+      class="noir-lookbook__poster"
+      style="background-image: url('{{ section.settings.poster | image_url: width: 2400 }}');"
+    ></div>
+  {%- else -%}
+    <div
+      class="noir-lookbook__poster"
+      style="background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);"
+    ></div>
+  {%- endif -%}
+
+  <div class="noir-lookbook__overlay"></div>
+
+  <div class="noir-lookbook__content noir-reveal">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="noir-lookbook__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="noir-lookbook__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="noir-lookbook__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.video != blank or section.settings.cta_link != blank -%}
+      {%- if section.settings.cta_link != blank -%}
+        <a href="{{ section.settings.cta_link }}" class="noir-lookbook__play" aria-label="{{ section.settings.cta_label | default: 'Play' | escape }}">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <polygon points="6 4 20 12 6 20 6 4"></polygon>
+          </svg>
+        </a>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIR Lookbook",
+  "tag": "section",
+  "class": "noir-lookbook-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background video (autoplay, muted, loop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster image (fallback if no video)",
+      "info": "Used as the static background if you don't upload a video."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow text",
+      "default": "Lookbook"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "The Movement"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Body text",
+      "default": "Step into the world we've built — a study in fabric, fit, and intent."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Play button label (a11y)",
+      "default": "Watch the film"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Play button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Lookbook"
+    }
+  ]
+}
+{% endschema %}

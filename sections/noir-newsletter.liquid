@@ -1,0 +1,97 @@
+{%- comment -%}
+  NOIR Newsletter — Email capture using Shopify customer form
+{%- endcomment -%}
+
+{%- liquid
+  assign form_id = 'noir-newsletter-' | append: section.id
+-%}
+
+<section
+  class="noir-newsletter noir-reveal"
+  {{ section.shopify_attributes }}
+>
+  <div class="noir-newsletter__inner">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="noir-newsletter__eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.title != blank -%}
+      <h2 class="noir-newsletter__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="noir-newsletter__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    {%- form 'customer', id: form_id, class: 'noir-newsletter__form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      {%- if form.posted_successfully? -%}
+        <p style="color:#d4af37; font-size:0.85rem; margin: 1rem 0 0;">
+          {{ 'general.newsletter_form.confirmation' | t: default: 'Thanks for subscribing.' }}
+        </p>
+      {%- else -%}
+        <input
+          type="email"
+          name="contact[email]"
+          class="noir-newsletter__input"
+          placeholder="{{ section.settings.placeholder | default: 'Enter your email' }}"
+          required
+          aria-label="Email address"
+        >
+        <button type="submit" class="noir-newsletter__button">
+          {{ section.settings.button_label | default: 'Subscribe' }}
+        </button>
+      {%- endif -%}
+      {%- if form.errors -%}
+        <p style="color:#ff6b6b; font-size:0.8rem; margin: 0.5rem 0 0;">
+          {{ form.errors | default_errors }}
+        </p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIR Newsletter",
+  "tag": "section",
+  "class": "noir-newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Join the list"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Body",
+      "default": "Be the first to know about new drops, exclusive offers, and restocks."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Newsletter"
+    }
+  ]
+}
+{% endschema %}

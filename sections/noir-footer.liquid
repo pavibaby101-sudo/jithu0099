@@ -1,0 +1,201 @@
+{%- comment -%}
+  NOIR Footer — 4-column dark footer with social + payments
+  Safe against missing linklists.
+{%- endcomment -%}
+
+{%- liquid
+  assign year = 'now' | date: '%Y'
+
+  assign menu_shop = section.settings.menu_shop
+  assign menu_help = section.settings.menu_help
+  assign menu_about = section.settings.menu_about
+
+  assign has_shop = false
+  if menu_shop != blank and linklists[menu_shop] != blank
+    assign has_shop = true
+  endif
+
+  assign has_help = false
+  if menu_help != blank and linklists[menu_help] != blank
+    assign has_help = true
+  endif
+
+  assign has_about = false
+  if menu_about != blank and linklists[menu_about] != blank
+    assign has_about = true
+  endif
+-%}
+
+<footer class="noir-footer" {{ section.shopify_attributes }}>
+  <div class="noir-footer__inner">
+    <div class="noir-footer__brand">
+      <h3>{{ section.settings.logo_text | default: shop.name }}</h3>
+      <p>{{ section.settings.tagline | default: 'Luxury staples for the modern disruptor. Precision-tailored pieces that break convention and redefine presence.' }}</p>
+      <div class="noir-footer__social">
+        {%- if section.settings.instagram != blank -%}
+          <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="1.5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="1.5"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="1.5"></line>
+            </svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.tiktok != blank -%}
+          <a href="{{ section.settings.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.twitter != blank -%}
+          <a href="{{ section.settings.twitter }}" target="_blank" rel="noopener" aria-label="Twitter">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22 4.01s-2 1.32-2.5 1.5C18.97 4.97 18 4 17 4c-1.5 0-3 1-3 3v1C9 8 5 5 5 5s-3 5 3 9c-1 1-2 2-3 2 3 1.5 6 1 8 0 2-1 4-3 4-6 0-.5-.05-1-.13-1.5C18 8 20 6 22 4.01z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.youtube != blank -%}
+          <a href="{{ section.settings.youtube }}" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+              <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="currentColor"></polygon>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="noir-footer__col">
+      <h4>Shop</h4>
+      <ul>
+        {%- if has_shop -%}
+          {%- for link in linklists[menu_shop].links limit: 5 -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a href="/collections/all">All Products</a></li>
+          <li><a href="/collections/new">New Arrivals</a></li>
+          <li><a href="/collections/sale">Sale</a></li>
+          <li><a href="/collections/featured">Featured</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="noir-footer__col">
+      <h4>Help</h4>
+      <ul>
+        {%- if has_help -%}
+          {%- for link in linklists[menu_help].links limit: 5 -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a href="/pages/contact">Contact</a></li>
+          <li><a href="/pages/shipping">Shipping &amp; Returns</a></li>
+          <li><a href="/pages/faq">FAQ</a></li>
+          <li><a href="/pages/size-guide">Size Guide</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="noir-footer__col">
+      <h4>About</h4>
+      <ul>
+        {%- if has_about -%}
+          {%- for link in linklists[menu_about].links limit: 5 -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a href="/pages/about">Our Story</a></li>
+          <li><a href="/pages/sustainability">Sustainability</a></li>
+          <li><a href="/blogs/journal">Journal</a></li>
+          <li><a href="/pages/stockists">Stockists</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+
+  <div class="noir-footer__bottom">
+    <p class="noir-footer__copyright">
+      &copy; {{ year }} {{ shop.name }}. All rights reserved.
+    </p>
+    <div class="noir-footer__payments">
+      <span>We accept</span>
+      {%- if shop.enabled_payment_types.size > 0 -%}
+        {%- for type in shop.enabled_payment_types -%}
+          {{ type | payment_type_svg_tag: class: 'noir-payment-icon' }}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "NOIR Footer",
+  "tag": "section",
+  "class": "noir-footer-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Brand name",
+      "default": "NOIR"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Luxury staples for the modern disruptor."
+    },
+    {
+      "type": "header",
+      "content": "Menus"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_shop",
+      "label": "Shop menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_help",
+      "label": "Help menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_about",
+      "label": "About menu"
+    },
+    {
+      "type": "header",
+      "content": "Social"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter",
+      "label": "Twitter / X URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube",
+      "label": "YouTube URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Footer"
+    }
+  ]
+}
+{% endschema %}

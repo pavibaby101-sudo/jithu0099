@@ -1,0 +1,152 @@
+{%- comment -%}
+  NOIR Featured Collection — 4-up dark grid with sale badges + quick add
+  Safe against missing collection.
+{%- endcomment -%}
+
+{%- liquid
+  assign collection_handle = section.settings.collection
+  assign collection = nil
+  if collection_handle != blank and collections[collection_handle] != blank
+    assign collection = collections[collection_handle]
+  endif
+  assign limit = section.settings.products_to_show | default: 4
+  assign columns = section.settings.columns_desktop | default: 4
+-%}
+
+<section
+  class="noir-collection noir-reveal"
+  {{ section.shopify_attributes }}
+>
+  <div class="noir-collection__header">
+    <h2 class="noir-collection__title">
+      {{ section.settings.title | default: 'Designed to Disrupt' }}
+    </h2>
+    <a href="{{ collection.url | default: '/collections/all' }}" class="noir-collection__view-all">
+      View All
+    </a>
+  </div>
+
+  <div class="noir-collection__grid">
+    {%- if collection and collection.products.size > 0 -%}
+      {%- for product in collection.products limit: limit -%}
+        {%- liquid
+          assign first_image = nil
+          if product.featured_media != blank
+            assign first_image = product.featured_media
+          elsif product.media.size > 0
+            assign first_image = product.media.first
+          endif
+          assign on_sale = false
+          if product.compare_at_price > product.price
+            assign on_sale = true
+          endif
+        -%}
+        <a
+          href="{{ product.url }}"
+          class="noir-product-card"
+          aria-label="{{ product.title | escape }}"
+        >
+          <div class="noir-product-card__media">
+            {%- if first_image != blank -%}
+              <img
+                src="{{ first_image | image_url: width: 800 }}"
+                alt="{{ first_image.alt | default: product.title | escape }}"
+                width="{{ first_image.width }}"
+                height="{{ first_image.height }}"
+                loading="lazy"
+              >
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+
+            {%- if on_sale -%}
+              <span class="noir-product-card__badge">Sale</span>
+            {%- endif -%}
+
+            {%- if product.available -%}
+              <button
+                type="button"
+                class="noir-product-card__quick-add"
+                data-noir-quick-add="{{ product.selected_or_first_available_variant.id }}"
+                onclick="event.preventDefault();"
+                aria-label="Quick add {{ product.title | escape }}"
+              >
+                + Quick Add
+              </button>
+            {%- endif -%}
+          </div>
+
+          <h3 class="noir-product-card__title">{{ product.title }}</h3>
+
+          <div class="noir-product-card__price">
+            {%- if on_sale -%}
+              <span class="noir-product-card__price--compare">
+                {{ product.compare_at_price | money }}
+              </span>
+              <span class="noir-product-card__price--sale">
+                {{ product.price | money }}
+              </span>
+            {%- else -%}
+              <span>{{ product.price | money }}</span>
+            {%- endif -%}
+          </div>
+        </a>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for i in (1..limit) -%}
+        <div class="noir-product-card">
+          <div class="noir-product-card__media" style="background: #1a1a1a; aspect-ratio: 4/5;"></div>
+          <h3 class="noir-product-card__title">Unisex Hoodie</h3>
+          <div class="noir-product-card__price">
+            <span class="noir-product-card__price--compare">₱56.00</span>
+            <span class="noir-product-card__price--sale">₱45.00</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "NOIR Featured Collection",
+  "tag": "section",
+  "class": "noir-featured-collection-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section title",
+      "default": "Designed to Disrupt"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Featured Collection"
+    }
+  ]
+}
+{% endschema %}

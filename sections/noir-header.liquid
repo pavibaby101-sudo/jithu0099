@@ -1,0 +1,102 @@
+{%- comment -%}
+  NOIR Header — Sticky transparent / solid
+  Safe against missing linklists.
+{%- endcomment -%}
+
+{%- liquid
+  assign transparent = section.settings.transparent_on_hero
+  assign menu_handle = section.settings.menu
+  assign has_menu = false
+  if menu_handle != blank and linklists[menu_handle] != blank
+    assign has_menu = true
+  endif
+-%}
+
+<header
+  class="noir-header{% if transparent %} noir-header--transparent{% endif %}"
+  data-noir-header
+  {% if transparent %}data-noir-transparent{% endif %}
+  {{ section.shopify_attributes }}
+>
+  <div class="noir-header__inner">
+    {%- comment -%} Left nav {%- endcomment -%}
+    <nav class="noir-header__nav" aria-label="Primary">
+      {%- if has_menu -%}
+        {%- for link in linklists[menu_handle].links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="/collections/all">Shop</a>
+        <a href="/collections">Catalog</a>
+        <a href="/pages/about">About</a>
+        <a href="/pages/contact">Contact</a>
+      {%- endif -%}
+    </nav>
+
+    {%- comment -%} Logo (center) {%- endcomment -%}
+    <div class="noir-header__logo">
+      <a href="{{ routes.root_url }}">
+        {{ section.settings.logo_text | default: shop.name }}
+      </a>
+    </div>
+
+    {%- comment -%} Right actions {%- endcomment -%}
+    <div class="noir-header__actions">
+      <a href="{{ routes.search_url }}" class="noir-header__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </a>
+      <a href="/account" class="noir-header__icon" aria-label="Account">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
+      <a href="{{ routes.cart_url }}" class="noir-header__icon" aria-label="Cart">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <span class="noir-header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "NOIR Header",
+  "tag": "section",
+  "class": "noir-header-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "logo_text",
+      "label": "Logo text",
+      "info": "Used instead of an image. Brand name appears in the Anton display font.",
+      "default": "NOIR"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu",
+      "info": "If blank, falls back to Shop / Catalog / About / Contact."
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_on_hero",
+      "label": "Transparent over hero",
+      "info": "Enable on home page so header is transparent over the hero, then turns solid on scroll.",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Header"
+    }
+  ]
+}
+{% endschema %}

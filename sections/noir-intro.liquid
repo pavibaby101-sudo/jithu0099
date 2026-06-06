@@ -1,0 +1,45 @@
+{%- comment -%}
+  NOIR Intro — Centered text block ("Designed to Disrupt")
+{%- endcomment -%}
+
+{%- if section.settings.title != blank or section.settings.text != blank -%}
+  <section
+    class="noir-intro noir-reveal"
+    {{ section.shopify_attributes }}
+  >
+    {%- if section.settings.title != blank -%}
+      <h2 class="noir-intro__title">{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p class="noir-intro__text">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Intro",
+  "tag": "section",
+  "class": "noir-intro-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Designed to Disrupt"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Body",
+      "default": "Luxury staples for the modern disruptor. Precision-tailored pieces that break convention and redefine presence. This isn't just fashion — it's a statement."
+    }
+  ],
+  "presets": [
+    {
+      "name": "NOIR Intro"
+    }
+  ]
+}
+{% endschema %}
