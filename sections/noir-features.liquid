@@ -1,0 +1,117 @@
+{%- comment -%}
+  NOIR Features — 3-column with icons (use SVG icon picker)
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-features" {{ section.shopify_attributes }}>
+    <div class="noir-features__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="noir-features__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="noir-features__title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+
+      <div class="noir-features__grid noir-stagger">
+        {%- for block in section.blocks -%}
+          <div class="noir-feature" {{ block.shopify_attributes }}>
+            <div class="noir-feature__icon">
+              {%- case block.settings.icon -%}
+                {%- when 'scissors' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><line x1="20" y1="4" x2="8.12" y2="15.88"></line><line x1="14.47" y1="14.48" x2="20" y2="20"></line><line x1="8.12" y1="8.12" x2="12" y2="12"></line></svg>
+                {%- when 'thread' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"></path><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg>
+                {%- when 'leaf' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19.2 2.3c1 5.7-1.2 13.3-7.4 17.1A8 8 0 0 1 11 20Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6"></path></svg>
+                {%- when 'award' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>
+                {%- when 'hand' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"></path><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"></path><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"></path><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"></path></svg>
+                {%- when 'bolt' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                {%- when 'crown' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 18 L4 7 L8 12 L12 5 L16 12 L20 7 L22 18 Z"></path><path d="M2 22 H22"></path></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle></svg>
+              {%- endcase -%}
+            </div>
+            {%- if block.settings.title != blank -%}
+              <h3 class="noir-feature__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <p class="noir-feature__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Features",
+  "tag": "section",
+  "class": "noir-features-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Why ATTITUDE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Built different"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "scissors", "label": "Tailored" },
+            { "value": "thread", "label": "Crafted" },
+            { "value": "leaf", "label": "Sustainable" },
+            { "value": "award", "label": "Award-winning" },
+            { "value": "hand", "label": "Handmade" },
+            { "value": "bolt", "label": "Bold" },
+            { "value": "crown", "label": "Premium" }
+          ],
+          "default": "scissors"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Tailored by hand"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Every piece passes through 12 sets of hands before it reaches yours."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "NOIR Features",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "scissors", "title": "Tailored by hand", "text": "Every piece passes through 12 sets of hands." } },
+        { "type": "feature", "settings": { "icon": "leaf", "title": "Ethically sourced", "text": "100% organic cotton, recycled packaging." } },
+        { "type": "feature", "settings": { "icon": "award", "title": "Award-winning", "text": "Voted Best Streetwear 2025." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

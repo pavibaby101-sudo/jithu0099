@@ -1,0 +1,78 @@
+{%- comment -%}
+  NOIR Press — "As seen in" logos row
+  Up to 8 logos.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-press" {{ section.shopify_attributes }}>
+    <div class="noir-press__inner">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="noir-press__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+
+      <div class="noir-press__grid">
+        {%- for block in section.blocks -%}
+          <div class="noir-press__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                src="{{ block.settings.image | image_url: width: 400 }}"
+                alt="{{ block.settings.name | default: block.settings.image.alt | escape }}"
+                loading="lazy"
+              >
+            {%- elsif block.settings.name != blank -%}
+              <span class="noir-press__name">{{ block.settings.name }}</span>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Press",
+  "tag": "section",
+  "class": "noir-press-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "As featured in"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image (white/grayscale works best)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Fallback text (if no image)",
+          "info": "Used when no image is uploaded. Renders in a luxury display font."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "NOIR Press",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "VOGUE" } },
+        { "type": "logo", "settings": { "name": "HYPEBEAST" } },
+        { "type": "logo", "settings": { "name": "HIGH SNOBIETY" } },
+        { "type": "logo", "settings": { "name": "DAZED" } },
+        { "type": "logo", "settings": { "name": "i-D" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,149 @@
+{%- comment -%}
+  NOIR Testimonials — Auto-rotating carousel of reviews
+  Up to 8 testimonial blocks.
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-testimonials" {{ section.shopify_attributes }}>
+    <div class="noir-testimonials__inner">
+      <div class="noir-testimonials__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="noir-testimonials__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="noir-testimonials__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+      </div>
+
+      <div
+        class="noir-testimonials__viewport"
+        data-noir-testimonials
+        aria-live="polite"
+      >
+        <div class="noir-testimonials__track">
+          {%- for block in section.blocks -%}
+            <div class="noir-testimonials__slide" {{ block.shopify_attributes }}>
+              <div class="noir-testimonials__stars" aria-label="5 out of 5 stars">
+                {%- for i in (1..5) -%}★{%- endfor -%}
+              </div>
+              {%- if block.settings.quote != blank -%}
+                <blockquote class="noir-testimonials__quote">
+                  &ldquo;{{ block.settings.quote }}&rdquo;
+                </blockquote>
+              {%- endif -%}
+              <div class="noir-testimonials__author">
+                {%- if block.settings.avatar != blank -%}
+                  <img
+                    src="{{ block.settings.avatar | image_url: width: 120 }}"
+                    alt="{{ block.settings.author | escape }}"
+                    class="noir-testimonials__avatar"
+                    width="60"
+                    height="60"
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="noir-testimonials__avatar" aria-hidden="true"></div>
+                {%- endif -%}
+                <div>
+                  {%- if block.settings.author != blank -%}
+                    <p class="noir-testimonials__name">{{ block.settings.author }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.role != blank -%}
+                    <p class="noir-testimonials__role">{{ block.settings.role }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+
+      <div class="noir-testimonials__dots" data-noir-testimonials-dots></div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Testimonials",
+  "tag": "section",
+  "class": "noir-testimonials-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Voices"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "What they say"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "The fit, the fabric, the way it makes me feel. ATTITUDE is the only label I reach for."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author",
+          "default": "Aria Mendoza"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role / location",
+          "default": "Verified buyer — Los Angeles"
+        },
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar (optional)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "NOIR Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "The fit, the fabric, the way it makes me feel. ATTITUDE is the only label I reach for.",
+            "author": "Aria Mendoza",
+            "role": "Verified buyer — Los Angeles"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "I've owned a lot of hoodies. None of them feel like this. None of them look like this either.",
+            "author": "Theo K.",
+            "role": "Verified buyer — Berlin"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Fast shipping, beautiful packaging, and the piece itself is a work of art. Worth every rupee.",
+            "author": "Sana Iyer",
+            "role": "Verified buyer — Mumbai"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

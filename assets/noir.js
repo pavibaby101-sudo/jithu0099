@@ -252,7 +252,63 @@
     }, { passive: true });
   }
 
-  // ----- 10. Init -----
+  // ----- 10. Testimonials auto-rotate -----
+  function initTestimonials() {
+    var containers = document.querySelectorAll('[data-noir-testimonials]');
+    containers.forEach(function (viewport) {
+      var track = viewport.querySelector('.noir-testimonials__track');
+      var slides = viewport.querySelectorAll('.noir-testimonials__slide');
+      var dotsContainer = document.querySelector('[data-noir-testimonials-dots]');
+      if (!track || slides.length === 0) return;
+
+      var current = 0;
+      var interval = null;
+
+      // Build dots
+      if (dotsContainer) {
+        for (var i = 0; i < slides.length; i++) {
+          var dot = document.createElement('button');
+          dot.className = 'noir-testimonials__dot';
+          dot.setAttribute('aria-label', 'Show testimonial ' + (i + 1));
+          (function (idx) {
+            dot.addEventListener('click', function () { goTo(idx); resetInterval(); });
+          })(i);
+          dotsContainer.appendChild(dot);
+        }
+      }
+      var dots = dotsContainer ? dotsContainer.querySelectorAll('.noir-testimonials__dot') : [];
+
+      function goTo(idx) {
+        current = idx;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        if (dots.length) {
+          dots.forEach(function (d, i) { d.classList.toggle('is-active', i === current); });
+        }
+      }
+
+      function next() {
+        goTo((current + 1) % slides.length);
+      }
+
+      function resetInterval() {
+        if (interval) clearInterval(interval);
+        interval = setInterval(next, 6000);
+      }
+
+      goTo(0);
+      resetInterval();
+
+      // Pause on hover
+      viewport.addEventListener('mouseenter', function () {
+        if (interval) clearInterval(interval);
+      });
+      viewport.addEventListener('mouseleave', function () {
+        resetInterval();
+      });
+    });
+  }
+
+  // ----- 11. Init -----
   function init() {
     initHeader();
     initReveal();
@@ -262,6 +318,7 @@
     initParallax();
     initMagnetic();
     initProgress();
+    initTestimonials();
   }
 
   if (document.readyState === 'loading') {

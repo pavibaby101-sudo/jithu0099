@@ -1,0 +1,119 @@
+{%- comment -%}
+  NOIR FAQ — Accordion (uses native <details>)
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-faq" {{ section.shopify_attributes }}>
+    <div class="noir-faq__inner">
+      <div class="noir-faq__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="noir-faq__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="noir-faq__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <p class="noir-faq__text">{{ section.settings.text }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="noir-faq__list">
+        {%- for block in section.blocks -%}
+          <details class="noir-faq__item" {{ block.shopify_attributes }}>
+            <summary class="noir-faq__question">
+              <span>{{ block.settings.question }}</span>
+              <span class="noir-faq__icon" aria-hidden="true">+</span>
+            </summary>
+            <div class="noir-faq__answer">
+              {{ block.settings.answer }}
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR FAQ",
+  "tag": "section",
+  "class": "noir-faq-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Got questions?"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Frequently Asked"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Subtitle",
+      "default": "Everything you need to know before you order."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "How long does shipping take?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Standard shipping takes 5–8 business days. Express is 2–3. Worldwide is 7–14.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "NOIR FAQ",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Standard shipping takes 5–8 business days. Express is 2–3.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>30-day returns on all unworn items. We provide a prepaid return label.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes — we ship to 50+ countries. International orders over $200 ship free.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How do I care for my garment?",
+            "answer": "<p>Cold wash, inside out, hang dry. Detailed care instructions come with every order.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

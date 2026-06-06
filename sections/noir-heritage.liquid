@@ -1,0 +1,97 @@
+{%- comment -%}
+  NOIR Heritage — Vertical timeline of brand milestones
+{%- endcomment -%}
+
+{%- if section.blocks.size > 0 -%}
+  <section class="noir-heritage" {{ section.shopify_attributes }}>
+    <div class="noir-heritage__inner">
+      <div class="noir-heritage__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="noir-heritage__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+        {%- if section.settings.title != blank -%}
+          <h2 class="noir-heritage__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+      </div>
+
+      <div class="noir-heritage__timeline">
+        <div class="noir-heritage__line" aria-hidden="true"></div>
+        {%- for block in section.blocks -%}
+          <div class="noir-heritage__event" {{ block.shopify_attributes }}>
+            <div class="noir-heritage__year">{{ block.settings.year }}</div>
+            <div class="noir-heritage__dot" aria-hidden="true"></div>
+            <div class="noir-heritage__content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="noir-heritage__heading">{{ block.settings.title }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <p class="noir-heritage__text">{{ block.settings.text }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "NOIR Heritage Timeline",
+  "tag": "section",
+  "class": "noir-heritage-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The journey"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Heritage"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Event",
+      "settings": [
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2018"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Founded"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "A single seam in a small atelier. The first ATTITUDE piece was made by hand."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "NOIR Heritage Timeline",
+      "blocks": [
+        { "type": "event", "settings": { "year": "2018", "title": "Founded", "text": "A single seam in a small atelier." } },
+        { "type": "event", "settings": { "year": "2020", "title": "First drop", "text": "Sold out in 48 hours." } },
+        { "type": "event", "settings": { "year": "2022", "title": "Worldwide shipping", "text": "We started shipping to 50+ countries." } },
+        { "type": "event", "settings": { "year": "2024", "title": "100K customers", "text": "A milestone we don't take lightly." } },
+        { "type": "event", "settings": { "year": "2026", "title": "Next chapter", "text": "An ongoing study in form, fabric, and intent." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
