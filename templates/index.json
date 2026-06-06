@@ -13,6 +13,7 @@
       "type": "noir-hero",
       "name": "NOIR Hero",
       "settings": {
+        "image": "shopify://shop_images/light-wooden-table-in-a-clothing-store-with-a-blurred-background-copy-space-photo.jpg",
         "headline_1": "wear",
         "headline_2": "your",
         "headline_3": "attitude",
